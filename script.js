@@ -1,31 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-/* =================================
-   QUIZ DATA (WITH YOUR PHOTOS)
-================================= */
+/*********************************
+ QUIZ DATA (ALL QUESTIONS)
+*********************************/
 
 const quizData = [
   {
     question: "Where did we first meet and everything quietly changed?",
-    image: "photos/Q1.jpg",
-    options: ["Fig at Museo", "Hinge", "Dev and Pulkit’s house"],
+    options: [
+      "Fig at Museo",
+      "Hinge",
+      "Dev and Pulkit’s house"
+    ],
     correct: 2
   },
   {
     question: "What is my favourite thing to do to you 😏",
-    image: "photos/Q2.jpg",
-    options: ["Licku", "Stand behind you when you cook", "Ragebait"],
+    options: [
+      "Licku",
+      "Stand behind you when you cook",
+      "Ragebait"
+    ],
     correct: 2
   },
   {
     question: "What’s our favorite trip together?",
-    image: "photos/Q3.jpg",
-    options: ["Montreal", "Niagara", "Shehdi Chaand"],
+    options: [
+      "Montreal",
+      "Niagara",
+      "Shehdi Chaand"
+    ],
     correct: 2
   },
   {
     question: "What is our favourite hobby?",
-    image: "photos/Q4.jpg",
     options: [
       "Attending concerts",
       "Napping",
@@ -33,69 +41,63 @@ const quizData = [
     ],
     correct: 2
   },
-  {
-    question: "Who is more dramatic?",
-    image: "photos/Q5.jpg",
-    options: ["Me", "Me", "Me"],
-    correct: 1
-  },
+
+  // ❤️ FINAL QUESTION (Valentine ask)
   {
     question: "Will you be my Valentine? 💕",
-    image: "photos/Q6.jpg",
-    options: ["YES", "Obviously Yes", "No"],
+    options: [
+      "YES",
+      "Obviously Yes",
+      "No"
+    ],
     correct: 1
   }
 ];
 
 
-/* =================================
-   SETUP
-================================= */
+
+/*********************************
+ SETUP
+*********************************/
 
 let current = 0;
 const quizDiv = document.getElementById("quiz");
 
 
-/* =================================
-   CONFETTI HEART BURST
-================================= */
+
+/*********************************
+ HEART EXPLOSION
+*********************************/
 
 function heartExplosion() {
   confetti({
     particleCount: 250,
     spread: 80,
     shapes: ["heart"],
+    scalar: 1.2,
     origin: { y: 0.6 }
   });
 }
 
 
-/* =================================
-   LOAD QUESTION
-================================= */
+
+/*********************************
+ LOAD QUESTION
+*********************************/
 
 function loadQuestion() {
   const q = quizData[current];
 
   quizDiv.innerHTML = "";
 
-  // Question text
   const questionEl = document.createElement("p");
   questionEl.innerText = q.question;
   quizDiv.appendChild(questionEl);
 
-  // Photo
-  const img = document.createElement("img");
-  img.src = q.image;
-  img.className = "quiz-image";
-  quizDiv.appendChild(img);
-
-  // Feedback
   const feedback = document.createElement("p");
   feedback.id = "feedback";
   quizDiv.appendChild(feedback);
 
-  // Buttons
   q.options.forEach((option, index) => {
     const btn = document.createElement("button");
     btn.innerText = option;
@@ -105,9 +107,10 @@ function loadQuestion() {
 }
 
 
-/* =================================
-   CHECK ANSWER
-================================= */
+
+/*********************************
+ CHECK ANSWER
+*********************************/
 
 function checkAnswer(selected) {
   const correct = quizData[current].correct;
@@ -121,23 +124,34 @@ function checkAnswer(selected) {
     setTimeout(() => {
       current++;
 
+      // 🎉 if last question → go to countdown
       if (current >= quizData.length) {
         window.location.href = "countdown.html";
       } else {
         loadQuestion();
       }
 
-    }, 700);
+    }, 800);
 
   } else {
-    feedback.innerText = "Try again 😝";
+
+    const wrongMessages = [
+      "Try again 😝",
+      "Nope 😂",
+      "You know the answer",
+      "Hmmmm think harder"
+    ];
+
+    feedback.innerText =
+      wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
   }
 }
 
 
-/* =================================
-   FLOATING HEARTS BACKGROUND
-================================= */
+
+/*********************************
+ FLOATING HEARTS BACKGROUND
+*********************************/
 
 function createHeart() {
   const heart = document.createElement("div");
@@ -156,9 +170,10 @@ function createHeart() {
 setInterval(createHeart, 500);
 
 
-/* =================================
-   START QUIZ
-================================= */
+
+/*********************************
+ START
+*********************************/
 
 loadQuestion();
 
