@@ -7,8 +7,8 @@ const quizData = [
     question: "Where did we first meet and everything quietly changed?",
     options: [
       "Fig at Museo",
-      "Hinge"
-     "Dev and Pulkit’s house",
+      "Hinge",
+     "Dev and Pulkit’s house"
     ],
     correct: 2
   },
@@ -16,8 +16,8 @@ const quizData = [
     question: "What is my favourite thing to do to you 😏",
     options: [
       "Licku",
-      "Stand behind you when you cook"
-      "Ragebait",
+      "Stand behind you when you cook",
+      "Ragebait"
     ],
     correct: 2
   },
