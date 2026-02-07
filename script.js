@@ -1,8 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-/* ==============================
+/* =================================
+   BACKGROUND MUSIC (auto start)
+================================= */
+
+const bgMusic = document.getElementById("bgMusic");
+
+document.body.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.volume = 0.5;
+    bgMusic.play();
+  }
+}, { once: true });
+
+
+
+/* =================================
    QUIZ DATA
-============================== */
+================================= */
 
 const quizData = [
   {
@@ -52,9 +67,10 @@ const quizData = [
 let current = 0;
 
 
-/* ==============================
+
+/* =================================
    CONFETTI (safe)
-============================== */
+================================= */
 
 function heartExplosion() {
   if (typeof confetti !== "undefined") {
@@ -67,9 +83,10 @@ function heartExplosion() {
 }
 
 
-/* ==============================
-   LOAD QUESTION
-============================== */
+
+/* =================================
+   LOAD QUESTION (smooth fade)
+================================= */
 
 function loadQuestion() {
 
@@ -78,40 +95,50 @@ function loadQuestion() {
 
   const q = quizData[current];
 
-  quizDiv.innerHTML = "";
+  quizDiv.classList.add("fade-out");
 
-  const questionEl = document.createElement("p");
-  questionEl.innerText = q.question;
-  quizDiv.appendChild(questionEl);
+  setTimeout(() => {
 
-  const img = document.createElement("img");
-  img.src = q.image;
-  img.className = "quiz-image";
-  quizDiv.appendChild(img);
+    quizDiv.innerHTML = "";
 
-  const songBtn = document.createElement("a");
-  songBtn.href = q.song;
-  songBtn.target = "_blank";
-  songBtn.innerText = "🎵 Play our song";
-  songBtn.className = "spotify-btn";
-  quizDiv.appendChild(songBtn);
+    const questionEl = document.createElement("p");
+    questionEl.innerText = q.question;
+    quizDiv.appendChild(questionEl);
 
-  const feedback = document.createElement("p");
-  feedback.id = "feedback";
-  quizDiv.appendChild(feedback);
+    const img = document.createElement("img");
+    img.src = q.image;
+    img.className = "quiz-image";
+    quizDiv.appendChild(img);
 
-  q.options.forEach((option, index) => {
-    const btn = document.createElement("button");
-    btn.innerText = option;
-    btn.onclick = () => checkAnswer(index);
-    quizDiv.appendChild(btn);
-  });
+    const songBtn = document.createElement("a");
+    songBtn.href = q.song;
+    songBtn.target = "_blank";
+    songBtn.innerText = "🎵 Play our song";
+    songBtn.className = "spotify-btn";
+    quizDiv.appendChild(songBtn);
+
+    const feedback = document.createElement("p");
+    feedback.id = "feedback";
+    quizDiv.appendChild(feedback);
+
+    q.options.forEach((option, index) => {
+      const btn = document.createElement("button");
+      btn.innerText = option;
+      btn.onclick = () => checkAnswer(index);
+      quizDiv.appendChild(btn);
+    });
+
+    quizDiv.classList.remove("fade-out");
+    quizDiv.classList.add("fade-in");
+
+  }, 200);
 }
 
 
-/* ==============================
+
+/* =================================
    CHECK ANSWER
-============================== */
+================================= */
 
 function checkAnswer(selected) {
 
@@ -124,11 +151,13 @@ function checkAnswer(selected) {
 
     setTimeout(() => {
       current++;
+
       if (current >= quizData.length) {
         window.location.href = "countdown.html";
       } else {
         loadQuestion();
       }
+
     }, 700);
 
   } else {
@@ -146,9 +175,10 @@ function checkAnswer(selected) {
 }
 
 
-/* ==============================
+
+/* =================================
    START
-============================== */
+================================= */
 
 loadQuestion();
 
