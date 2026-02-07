@@ -111,16 +111,37 @@ function loadQuestion(){
 
 function checkAnswer(selected){
 
+  const feedback = document.getElementById("feedback");
+
   if(selected===quizData[current].correct){
 
     heartExplosion();
-    current++;
+    feedback.innerText="Correct 😌💕";
 
-    if(current>=quizData.length){
-      showCountdown();   // ⭐ NO redirect anymore
-    } else {
-      loadQuestion();
-    }
+    setTimeout(()=>{
+      current++;
+
+      if(current>=quizData.length){
+        showCountdown();
+      } else {
+        loadQuestion();
+      }
+
+    },600);
+
+  } else {
+
+    /* ⭐ RESTORED WRONG ANSWER FEEDBACK */
+
+    const wrongMessages=[
+      "Try again 😝",
+      "Nope 😂",
+      "Close but not quite",
+      "You know this one!"
+    ];
+
+    feedback.innerText=
+      wrongMessages[Math.floor(Math.random()*wrongMessages.length)];
   }
 }
 
@@ -140,12 +161,10 @@ function showCountdown(){
 /* TYPEWRITER */
 
 function startTypewriter(){
-
   const text="Every second with you feels special… and I can’t wait for our Valentine’s Day 💕";
   const el=document.getElementById("typeText");
 
   let i=0;
-
   function type(){
     if(i<text.length){
       el.innerHTML+=text.charAt(i++);
@@ -181,8 +200,6 @@ function startCountdown(){
   },1000);
 }
 
-
-/* START */
 
 loadQuestion();
 
