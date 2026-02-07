@@ -10,18 +10,19 @@ body {
 
 .container {
   background: white;
-  padding: 40px;
+  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.15);
   text-align: center;
-  width: 400px;
+  width: 90%;
+  max-width: 420px;
 }
 
 button {
   background: #ff4d6d;
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 18px;
   margin: 6px;
   border-radius: 20px;
   cursor: pointer;
@@ -29,20 +30,21 @@ button {
 
 .quiz-image {
   width: 100%;
-  border-radius: 12px;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
   margin: 12px 0;
 }
 
 .spotify-btn {
-  display: block;
+  display: inline-block;
   margin-bottom: 12px;
   color: #1db954;
+  font-weight: 600;
   text-decoration: none;
 }
 
-.hearts {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+#feedback {
+  font-weight: bold;
+  margin: 10px 0;
 }
