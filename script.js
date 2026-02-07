@@ -79,7 +79,7 @@ function heartExplosion(){
 }
 
 
-/* ================= QUIZ ================= */
+/* ================= LOAD QUESTION ================= */
 
 function loadQuestion(){
 
@@ -109,6 +109,8 @@ function loadQuestion(){
 }
 
 
+/* ================= CHECK ANSWER ================= */
+
 function checkAnswer(selected){
 
   const feedback = document.getElementById("feedback");
@@ -130,8 +132,6 @@ function checkAnswer(selected){
     },600);
 
   } else {
-
-    /* ⭐ RESTORED WRONG ANSWER FEEDBACK */
 
     const wrongMessages=[
       "Try again 😝",
@@ -158,24 +158,27 @@ function showCountdown(){
 }
 
 
-/* TYPEWRITER */
+/* ================= TYPEWRITER ================= */
 
 function startTypewriter(){
+
   const text="Every second with you feels special… and I can’t wait for our Valentine’s Day 💕";
   const el=document.getElementById("typeText");
 
   let i=0;
+
   function type(){
     if(i<text.length){
       el.innerHTML+=text.charAt(i++);
       setTimeout(type,40);
     }
   }
+
   type();
 }
 
 
-/* COUNTDOWN */
+/* ================= COUNTDOWN ================= */
 
 function startCountdown(){
 
