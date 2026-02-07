@@ -79,4 +79,52 @@ function loadQuestion() {
   quizDiv.appendChild(questionEl);
 
   const img = document.createElement("img");
-  im
+  img.src = q.image;
+  img.className = "quiz-image";
+  quizDiv.appendChild(img);
+
+  const songBtn = document.createElement("a");
+  songBtn.href = q.song;
+  songBtn.target = "_blank";
+  songBtn.innerText = "🎵 Play our song";
+  songBtn.className = "spotify-btn";
+  quizDiv.appendChild(songBtn);
+
+  const feedback = document.createElement("p");
+  feedback.id = "feedback";
+  quizDiv.appendChild(feedback);
+
+  q.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.innerText = option;
+    btn.onclick = () => checkAnswer(index);
+    quizDiv.appendChild(btn);
+  });
+}
+
+
+/* ===============================
+   CHECK ANSWER
+================================ */
+function checkAnswer(selected) {
+  if (selected === quizData[current].correct) {
+    heartExplosion();
+    current++;
+
+    setTimeout(() => {
+      if (current >= quizData.length) {
+        window.location.href = "countdown.html";
+      } else {
+        loadQuestion();
+      }
+    }, 600);
+  }
+}
+
+
+/* ===============================
+   START
+================================ */
+loadQuestion();
+
+});
