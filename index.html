@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,11 +19,11 @@
 
   <div class="container">
 
-    <!-- Quiz loads dynamically here -->
+    <!-- Quiz loads here dynamically -->
     <div id="quiz"></div>
 
 
-    <!-- ❤️ Valentine screen (hidden at first) -->
+    <!-- ❤️ Valentine screen (hidden until quiz ends) -->
     <div id="valentine" class="hidden">
       <h2 id="romanticText"></h2>
 
@@ -33,5 +34,11 @@
   </div>
 
 
-  <!-- 🎉 Confetti library -->
-  <script
+  <!-- 🎉 Confetti library (REQUIRED for hearts/confetti) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Your main JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
