@@ -7,8 +7,8 @@ const quizData = [
     question: "Where did we first meet and everything quietly changed?",
     options: [
       "Fig at Museo",
-      "Dev and Pulkit’s house",
       "Hinge"
+     "Dev and Pulkit’s house",
     ],
     correct: 2
   },
@@ -16,8 +16,8 @@ const quizData = [
     question: "What is my favourite thing to do to you 😏",
     options: [
       "Licku",
-      "Ragebait",
       "Stand behind you when you cook"
+      "Ragebait",
     ],
     correct: 2
   },
@@ -37,7 +37,7 @@ const quizData = [
       "Napping",
       "Reading our chats about when I was apparently more romantic 😒"
     ],
-    correct: 3
+    correct: 2
   },
   {
     question: "Who is more dramatic?",
