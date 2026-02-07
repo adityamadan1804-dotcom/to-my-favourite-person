@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 /*********************************
- QUIZ DATA (ALL QUESTIONS)
+ QUIZ DATA (with IMAGES)
 *********************************/
 
 const quizData = [
   {
     question: "Where did we first meet and everything quietly changed?",
+    image: "photos/Q1.jpg",
     options: [
       "Fig at Museo",
       "Hinge",
@@ -16,6 +17,7 @@ const quizData = [
   },
   {
     question: "What is my favourite thing to do to you 😏",
+    image: "photos/Q2.jpg",
     options: [
       "Licku",
       "Stand behind you when you cook",
@@ -25,6 +27,7 @@ const quizData = [
   },
   {
     question: "What’s our favorite trip together?",
+    image: "photos/Q3.jpg",
     options: [
       "Montreal",
       "Niagara",
@@ -34,6 +37,7 @@ const quizData = [
   },
   {
     question: "What is our favourite hobby?",
+    image: "photos/Q4.jpg",
     options: [
       "Attending concerts",
       "Napping",
@@ -41,10 +45,21 @@ const quizData = [
     ],
     correct: 2
   },
+  {
+    question: "Who is more dramatic?",
+    image: "photos/Q5.jpg",
+    options: [
+      "Me",
+      "Me",
+      "Me"
+    ],
+    correct: 1
+  },
 
-  // ❤️ FINAL QUESTION (Valentine ask)
+  // ❤️ FINAL QUESTION
   {
     question: "Will you be my Valentine? 💕",
+    image: "photos/Q6.jpg",
     options: [
       "YES",
       "Obviously Yes",
@@ -82,7 +97,7 @@ function heartExplosion() {
 
 
 /*********************************
- LOAD QUESTION
+ LOAD QUESTION (NOW WITH IMAGE)
 *********************************/
 
 function loadQuestion() {
@@ -90,14 +105,23 @@ function loadQuestion() {
 
   quizDiv.innerHTML = "";
 
+  // Question text
   const questionEl = document.createElement("p");
   questionEl.innerText = q.question;
   quizDiv.appendChild(questionEl);
 
+  // 📸 Image (NEW)
+  const img = document.createElement("img");
+  img.src = q.image;
+  img.className = "quiz-image";
+  quizDiv.appendChild(img);
+
+  // Feedback
   const feedback = document.createElement("p");
   feedback.id = "feedback";
   quizDiv.appendChild(feedback);
 
+  // Buttons
   q.options.forEach((option, index) => {
     const btn = document.createElement("button");
     btn.innerText = option;
@@ -124,7 +148,6 @@ function checkAnswer(selected) {
     setTimeout(() => {
       current++;
 
-      // 🎉 if last question → go to countdown
       if (current >= quizData.length) {
         window.location.href = "countdown.html";
       } else {
@@ -150,7 +173,7 @@ function checkAnswer(selected) {
 
 
 /*********************************
- FLOATING HEARTS BACKGROUND
+ FLOATING HEARTS
 *********************************/
 
 function createHeart() {
