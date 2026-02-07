@@ -98,4 +98,4 @@ function checkAnswer(selected) {
 
     setTimeout(() => {
       if (current >= quizData.length) {
-        window.location.href = "countdown.htm
+        window.location.href = "countdown.html
