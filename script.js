@@ -1,5 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 /*********************************
- QUIZ DATA
+ QUIZ DATA (ALL QUESTIONS)
 *********************************/
 
 const quizData = [
@@ -8,7 +10,7 @@ const quizData = [
     options: [
       "Fig at Museo",
       "Hinge",
-     "Dev and Pulkit’s house"
+      "Dev and Pulkit’s house"
     ],
     correct: 2
   },
@@ -39,12 +41,14 @@ const quizData = [
     ],
     correct: 2
   },
+
+  // ❤️ FINAL QUESTION (Valentine ask)
   {
-    question: "Who is more dramatic?",
+    question: "Will you be my Valentine? 💕",
     options: [
-      "Me",
-      "Me",
-      "Me"
+      "YES",
+      "Obviously Yes",
+      "No"
     ],
     correct: 1
   }
@@ -59,9 +63,6 @@ const quizData = [
 let current = 0;
 const quizDiv = document.getElementById("quiz");
 
-const correctSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3");
-const wrongSound = new Audio("https://assets.mixkit.co/active_storage/sfx/294/294-preview.mp3");
-
 
 
 /*********************************
@@ -70,8 +71,8 @@ const wrongSound = new Audio("https://assets.mixkit.co/active_storage/sfx/294/29
 
 function heartExplosion() {
   confetti({
-    particleCount: 40,
-    spread: 70,
+    particleCount: 250,
+    spread: 80,
     shapes: ["heart"],
     scalar: 1.2,
     origin: { y: 0.6 }
@@ -87,30 +88,22 @@ function heartExplosion() {
 function loadQuestion() {
   const q = quizData[current];
 
-  quizDiv.classList.add("fade-out");
+  quizDiv.innerHTML = "";
 
-  setTimeout(() => {
-    quizDiv.innerHTML = "";
+  const questionEl = document.createElement("p");
+  questionEl.innerText = q.question;
+  quizDiv.appendChild(questionEl);
 
-    const questionEl = document.createElement("p");
-    questionEl.innerText = q.question;
-    quizDiv.appendChild(questionEl);
+  const feedback = document.createElement("p");
+  feedback.id = "feedback";
+  quizDiv.appendChild(feedback);
 
-    const feedback = document.createElement("p");
-    feedback.id = "feedback";
-    quizDiv.appendChild(feedback);
-
-    q.options.forEach((option, index) => {
-      const btn = document.createElement("button");
-      btn.innerText = option;
-      btn.onclick = () => checkAnswer(index);
-      quizDiv.appendChild(btn);
-    });
-
-    quizDiv.classList.remove("fade-out");
-    quizDiv.classList.add("fade-in");
-
-  }, 250);
+  q.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.innerText = option;
+    btn.onclick = () => checkAnswer(index);
+    quizDiv.appendChild(btn);
+  });
 }
 
 
@@ -125,64 +118,33 @@ function checkAnswer(selected) {
 
   if (selected === correct) {
 
-    correctSound.play();
     heartExplosion();
-
     feedback.innerText = "Correct 😌💕";
 
     setTimeout(() => {
       current++;
 
-      if (current < quizData.length) {
-        loadQuestion();
+      // 🎉 if last question → go to countdown
+      if (current >= quizData.length) {
+        window.location.href = "countdown.html";
       } else {
-        document.getElementById("quiz").style.display = "none";
-        document.getElementById("valentine").classList.remove("hidden");
-
-        // ❤️ Typewriter message appears
-        typeWriter(
-          "romanticText",
-          "So… after all this… there’s just one thing left to ask you 💕",
-          40
-        );
+        loadQuestion();
       }
-    }, 700);
+
+    }, 800);
 
   } else {
-    wrongSound.play();
 
     const wrongMessages = [
-      "Hmm try again 😝",
-      "Nopeee 😂",
-      "Close but not quite",
-      "You know this one 😏"
+      "Try again 😝",
+      "Nope 😂",
+      "You know the answer",
+      "Hmmmm think harder"
     ];
 
     feedback.innerText =
       wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
   }
-}
-
-
-
-/*********************************
- TYPEWRITER TEXT
-*********************************/
-
-function typeWriter(elementId, text, speed = 40) {
-  let i = 0;
-  const el = document.getElementById(elementId);
-  el.innerText = "";
-
-  function typing() {
-    if (i < text.length) {
-      el.innerText += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    }
-  }
-
-  typing();
 }
 
 
@@ -210,26 +172,9 @@ setInterval(createHeart, 500);
 
 
 /*********************************
- FINAL YES BUTTON
-*********************************/
-
-function celebrate() {
-  confetti({
-    particleCount: 300,
-    spread: 90,
-    origin: { y: 0.6 }
-  });
-
-  setTimeout(() => {
-    window.location.href = "countdown.html";
-  }, 1500);
-}
-
-
-
-/*********************************
  START
 *********************************/
 
-window.onload = loadQuestion;
+loadQuestion();
 
+});
