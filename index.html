@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>For You ❤️</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <h1>Hi love 💕</h1>
-  <p>This is the beginning of something special.</p>
-</body>
-</html>
+
+  <!-- 💕 Floating hearts background -->
+  <div class="hearts" id="hearts"></div>
+
+
+  <div class="container">
+
+    <!-- Quiz loads dynamically here -->
+    <div id="quiz"></div>
+
+
+    <!-- ❤️ Valentine screen (hidden at first) -->
+    <div id="valentine" class="hidden">
+      <h2 id="romanticText"></h2>
+
+      <button onclick="celebrate()">YES 💖</button>
+      <button onclick="celebrate()">Obviously yes 🙄</button>
+    </div>
+
+  </div>
+
+
+  <!-- 🎉 Confetti library -->
+  <script
