@@ -26,7 +26,11 @@ const quizData = [
     question: "What is our favourite hobby?",
     image: "photos/Q4.jpg",
     song: "https://open.spotify.com/track/0cYohCh24y1aMjJmcS9RBl?si=375935c6cfc64641",
-    options: ["Attending concerts", "Napping", "Reading our chats about when I was apparently more romantic 😒"],
+    options: [
+      "Attending concerts",
+      "Napping",
+      "Reading our chats about when I was apparently more romantic 😒"
+    ],
     correct: 2
   },
   {
@@ -46,30 +50,18 @@ const quizData = [
 ];
 
 let current = 0;
+const quizDiv = document.getElementById("quiz");
 
-
-/* ===============================
-   SAFE CONFETTI (won’t crash)
-================================ */
 function heartExplosion() {
-  if (typeof confetti !== "undefined") {
-    confetti({
-      particleCount: 200,
-      spread: 80,
-      origin: { y: 0.6 }
-    });
-  }
+  confetti({
+    particleCount: 250,
+    spread: 80,
+    shapes: ["heart"],
+    origin: { y: 0.6 }
+  });
 }
 
-
-/* ===============================
-   LOAD QUESTION
-================================ */
 function loadQuestion() {
-
-  const quizDiv = document.getElementById("quiz");
-  if (!quizDiv) return; // safety
-
   const q = quizData[current];
 
   quizDiv.innerHTML = "";
@@ -102,10 +94,6 @@ function loadQuestion() {
   });
 }
 
-
-/* ===============================
-   CHECK ANSWER
-================================ */
 function checkAnswer(selected) {
   if (selected === quizData[current].correct) {
     heartExplosion();
@@ -117,14 +105,10 @@ function checkAnswer(selected) {
       } else {
         loadQuestion();
       }
-    }, 600);
+    }, 700);
   }
 }
 
-
-/* ===============================
-   START
-================================ */
 loadQuestion();
 
 });
