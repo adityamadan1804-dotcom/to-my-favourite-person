@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+/* ==============================
+   QUIZ DATA
+============================== */
+
 const quizData = [
   {
     question: "Where did we first meet and everything quietly changed?",
@@ -26,11 +30,7 @@ const quizData = [
     question: "What is our favourite hobby?",
     image: "photos/Q4.jpg",
     song: "https://open.spotify.com/track/0cYohCh24y1aMjJmcS9RBl?si=375935c6cfc64641",
-    options: [
-      "Attending concerts",
-      "Napping",
-      "Reading our chats about when I was apparently more romantic 😒"
-    ],
+    options: ["Attending concerts", "Napping", "Reading our chats about when I was apparently more romantic 😒"],
     correct: 2
   },
   {
@@ -50,18 +50,32 @@ const quizData = [
 ];
 
 let current = 0;
-const quizDiv = document.getElementById("quiz");
+
+
+/* ==============================
+   CONFETTI (safe)
+============================== */
 
 function heartExplosion() {
-  confetti({
-    particleCount: 250,
-    spread: 80,
-    shapes: ["heart"],
-    origin: { y: 0.6 }
-  });
+  if (typeof confetti !== "undefined") {
+    confetti({
+      particleCount: 200,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+  }
 }
 
+
+/* ==============================
+   LOAD QUESTION
+============================== */
+
 function loadQuestion() {
+
+  const quizDiv = document.getElementById("quiz");
+  if (!quizDiv) return;
+
   const q = quizData[current];
 
   quizDiv.innerHTML = "";
@@ -94,20 +108,47 @@ function loadQuestion() {
   });
 }
 
+
+/* ==============================
+   CHECK ANSWER
+============================== */
+
 function checkAnswer(selected) {
+
+  const feedback = document.getElementById("feedback");
+
   if (selected === quizData[current].correct) {
+
     heartExplosion();
-    current++;
+    feedback.innerText = "Correct 😌💕";
 
     setTimeout(() => {
+      current++;
       if (current >= quizData.length) {
         window.location.href = "countdown.html";
       } else {
         loadQuestion();
       }
     }, 700);
+
+  } else {
+
+    const wrongMessages = [
+      "Nope 😂 try again",
+      "Hmmmm think harder 😏",
+      "Close but not quite",
+      "You know this one!"
+    ];
+
+    feedback.innerText =
+      wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
   }
 }
+
+
+/* ==============================
+   START
+============================== */
 
 loadQuestion();
 
