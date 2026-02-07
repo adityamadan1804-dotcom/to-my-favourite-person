@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Valentine ❤️</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- floating hearts background -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- background music continues -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="music/bg.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container fade-in">
+
+    <!-- ❤️ typewriter message -->
+    <h2 id="typeText"></h2>
+
+    <!-- final romantic photo -->
+    <img src="photos/Q7.jpg" class="quiz-image" alt="Us together">
+
+    <!-- countdown timer -->
+    <div id="countdown" class="countdown"></div>
+
+    <p class="countdown-text">
+      Until our Valentine’s Day ✨
+    </p>
+
+  </div>
+
+
+
+  <script>
+  /* =========================
+     TYPEWRITER
+  ========================= */
+
+  const text =
+    "Every second with you feels special… and I can’t wait for our Valentine’s Day 💕";
+
+  const el = document.getElementById("typeText");
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 40);
+    }
+  }
+
+  typeWriter();
+
+
+
+  /* =========================
+     COUNTDOWN
+  ========================= */
+
+  const countdownEl = document.getElementById("countdown");
+
+  const valentinesDay = new Date("February 14, 2026 00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = valentinesDay - now;
+
+    if (distance < 0) {
+      countdownEl.innerHTML = "💖 It’s Valentine’s Day 💖";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownEl.innerHTML = `
+      <div>${days}<span>days</span></div>
+      <div>${hours}<span>hrs</span></div>
+      <div>${minutes}<span>min</span></div>
+      <div>${seconds}<span>sec</span></div>
+    `;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+
+
+  /* =========================
+     FLOATING HEARTS
+  ========================= */
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 15 + 14 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+
+    document.getElementById("hearts").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 7000);
+  }
+
+  setInterval(createHeart, 500);
+
+  </script>
+
+</body>
+</html>
 
