@@ -1,89 +1,15 @@
-/* =========================
-   PAGE LAYOUT
-========================= */
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-
-  /* soft romantic gradient */
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 100vh;
-  overflow: hidden;
+.quiz-image {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 15px 0;
 }
 
-
-/* =========================
-   MAIN CARD
-========================= */
-
-.container {
-  background: white;
-  padding: 40px 30px;
-
-  border-radius: 24px;
-
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-
-  text-align: center;
-
-  max-width: 420px;
-  width: 90%;
-
-  position: relative;
-  z-index: 2;
-}
-
-
-/* =========================
-   TEXT
-========================= */
-
-p {
-  font-size: 18px;
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-h2 {
-  margin-bottom: 25px;
+.spotify-btn {
+  display: inline-block;
+  margin: 10px 0 15px;
+  color: #1db954;
   font-weight: 600;
+  text-decoration: none;
 }
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-  background: #ff4d6d;
-  color: white;
-
-  border: none;
-  border-radius: 30px;
-
-  padding: 12px 22px;
-  margin: 8px;
-
-  font-size: 15px;
-  font-weight: 500;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.07);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-
-/* =========================
-   FEEDBACK TEXT
-======
