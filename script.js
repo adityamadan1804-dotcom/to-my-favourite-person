@@ -26,7 +26,11 @@ const quizData = [
     question: "What is our favourite hobby?",
     image: "photos/Q4.jpg",
     song: "https://open.spotify.com/track/0cYohCh24y1aMjJmcS9RBl?si=375935c6cfc64641",
-    options: ["Attending concerts", "Napping", "Reading our chats about when I was apparently more romantic 😒"],
+    options: [
+      "Attending concerts",
+      "Napping",
+      "Reading our chats about when I was apparently more romantic 😒"
+    ],
     correct: 2
   },
   {
@@ -71,7 +75,6 @@ function loadQuestion() {
   img.className = "quiz-image";
   quizDiv.appendChild(img);
 
-  // Spotify button
   const songBtn = document.createElement("a");
   songBtn.href = q.song;
   songBtn.target = "_blank";
@@ -98,4 +101,14 @@ function checkAnswer(selected) {
 
     setTimeout(() => {
       if (current >= quizData.length) {
-        window.location.href = "countdown.html
+        window.location.href = "countdown.html";
+      } else {
+        loadQuestion();
+      }
+    }, 700);
+  }
+}
+
+loadQuestion();
+
+});
